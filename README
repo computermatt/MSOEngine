@@ -1,0 +1,22 @@
+Thank you for using MSOEngine.
+
+This (when it's done) will provide a full Objective-C implementation of the Stack Overflow API.
+
+As of right now, here's how to use it:
+
+    #import "MSOEngine.h"
+      MSOEngine *msoengine = [[MSOEngine alloc] init];
+     [msoengine setURL:@"url"];
+     [msoengine setAPIKey:@"key"];
+     NSArray *badges =[msoengine getBadgesforKey:@"name" hasCustomURL:@"url"]; 
+     NSString *users = [msoengine getUserID:167586 forKey:@"up_vote_count"];
+     NSArray *questions =[msoengine getQuestions:@"title"]; 
+     NSString *stats = [msoengine getStats:@"badges_per_minute"];
+
+For all Keys please refer to the topics posted at dev.meta.stackoverflow.com
+
+
+
+This source code is provided AS-IS and is subject to change without notice.
+
+If you have any questions about MSOEngine, please email me at matt@mattsapps.com
