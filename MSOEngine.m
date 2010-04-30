@@ -41,9 +41,9 @@
 -(NSArray *)connectMekThxBai:(NSString *)url firstkey:(NSString *)key1 secondkey:(NSString *)key2
 {
 	NSMutableArray *array = [NSMutableArray array];
-	SBJSON *parser = [[SBJSON alloc] init];
 	array = [[NSMutableArray alloc] init];
-
+	SBJSON *parser = [[SBJSON alloc] init];
+	
 		// Prepare URL request to download statuses from Twitter
 	NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
 	
@@ -84,7 +84,16 @@
 	NSString *result = [array objectAtIndex:0];
 	return result;
 }
-
+-(NSString *)getSingleQuestions:(NSString *)ID forKey:(NSString *)key
+{
+	NSString *theURL = [[NSString alloc] initWithFormat:@"%@questions/%@?key=%@",_url, ID, _apikey];
+	NSArray *array = [self connectMekThxBai:theURL 
+								   firstkey:@"questions" 
+								  secondkey:key];
+	NSString *result = [array objectAtIndex:0];
+	return result;
+	
+}
 -(NSArray*)getBadgesforKey:(NSString*)key hasCustomURL:(NSString *)customurl;
 {
 	if (customurl == nil) {
@@ -114,6 +123,8 @@
 								   secondkey:key];
 	return result;
 }
+
+
 -(NSArray*)getTagsforKey:(NSString*)key
 {
 	NSString *theURL = [[NSString alloc] initWithFormat:@"%@tags?key=%@",_url, _apikey];

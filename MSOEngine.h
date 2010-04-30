@@ -23,7 +23,7 @@
 	//methods
 -(NSString *)getUserID:(int)theID forKey:(NSString *)key;
 -(NSString *)getStats:(NSString *)key;
-
+-(NSString *)getSingleQuestions:(NSString *)ID forKey:(NSString *)key;
 
 -(NSArray*)getQuestions:(NSString *)key;
 -(NSArray*)getBadgesforKey:(NSString*)key hasCustomURL:(NSString *)customurl;
