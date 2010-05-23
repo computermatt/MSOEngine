@@ -19,19 +19,19 @@
 	//required
 -(void)setAPIKey:(NSString *)newapikey;
 -(void)setURL:(NSString *)newurl;
-
+-(NSString*)getDataforURL:(NSString *)url;
 	//methods
--(NSString *)getUserID:(int)theID forKey:(NSString *)key;
--(NSString *)getStats:(NSString *)key;
--(NSString *)getSingleQuestions:(NSString *)ID forKey:(NSString *)key;
+-(NSString *)getUserID:(int)theID forKey:(NSString *)key andData:(NSString *)data;
+-(NSString *)getStats:(NSString *)key andData:(NSString *)data;
+-(NSString *)getSingleQuestions:(NSString *)ID forKey:(NSString *)key andData:(NSString *)data;
+-(NSString*)getOwnerfromQuestions:(NSString *)key forID:(NSString *)ID andData:(NSString *)data;
 
--(NSArray*)getQuestions:(NSString *)key;
--(NSArray*)getBadgesforKey:(NSString*)key hasCustomURL:(NSString *)customurl;
--(NSArray*)getTagsforKey:(NSString*)key;
-
--(NSString *)apikey;
--(NSString *)url;
--(NSArray *)connectMekThxBai:(NSString *)url firstkey:(NSString *)key1 secondkey:(NSString *)key2;
+-(NSArray*)getQuestions:(NSString *)key andData:(NSString *)data;
+-(NSArray*)getBadgesforKey:(NSString*)key hasCustomURL:(NSString *)customurl andData:(NSString *)data;
+-(NSArray*)getTagsforKey:(NSString*)key andData:(NSString *)data;
+-(NSArray*)getAnswersforID:(NSString*)ID forKey:(NSString *)key andData:(NSString *)data;
+-(NSArray*)getOwnerfromAnswers:(NSString *)key forID:(NSString *)ID andData:(NSString *)data;
+-(NSArray *)connectMekThxBai:(NSString *)data firstkey:(NSString *)key1 secondkey:(NSString *)key2;
 
 
 

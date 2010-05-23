@@ -8,15 +8,18 @@ As of right now, here's how to use it:
       MSOEngine *msoengine = [[MSOEngine alloc] init];
      [msoengine setURL:@"url"];
      [msoengine setAPIKey:@"key"];
-     NSArray *badges =[msoengine getBadgesforKey:@"name" hasCustomURL:@"url"]; 
-     NSString *users = [msoengine getUserID:167586 forKey:@"up_vote_count"];
-     NSArray *questions =[msoengine getQuestions:@"title"]; 
-     NSString *stats = [msoengine getStats:@"badges_per_minute"];
-
-For all Keys please refer to the topics posted at dev.meta.stackoverflow.com
+     NSString *userFromURL = [[NSString alloc] initWithFormat:@"users/%d?",userID];
+    NSString *data = [engine getDataforURL:userFromURL];
+   NSString *repCount = [engine getUserID:userID forKey:@"key" andData:userFromID];
 
 
+     
 
-This source code is provided AS-IS and is subject to change without notice.
+For all Keys please refer to the topics posted at stackapps.com
+
+
+
+This source code licensed under the MIT License.
+
 
 If you have any questions about MSOEngine, please email me at matt@mattsapps.com
