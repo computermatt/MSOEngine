@@ -12,7 +12,7 @@
 @implementation MSOEngine
 
 
--(NSString*)getDataforURL:(NSString *)data
+-(NSString*)initWithDataforURL:(NSString *)data
 {
 	NSString *theURL = [[NSString alloc] initWithFormat:@"%@%@key=%@", _url, data, _apikey];
 	NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:theURL]];
@@ -24,13 +24,13 @@
 	return json_string;
 }
 
--(void)setAPIKey:(NSString *)newapikey
+-(void)initWithAPIKey:(NSString *)newapikey
 {
 	[_apikey release];
 	_apikey = [newapikey retain];
 
 }
--(void)setURL:(NSString *)newurl
+-(void)initWithURL:(NSString *)newurl
 {
 	[_url release];
 	_url = [newurl retain];
@@ -119,6 +119,32 @@
 	return final;
 	
 }
+-(NSString *)getBadgeCount:(NSString *)key andData:(NSString *)data
+{
+	NSMutableArray *array;// = [NSMutableArray array];
+	array = [[NSMutableArray alloc] init];
+	SBJSON *parser = [[SBJSON alloc] init];
+	
+	// parse the JSON response into an object
+	// Here we're using NSArray since we're parsing an array of JSON status objects
+	NSMutableDictionary *jsonObj = [parser objectWithString:data error:nil];
+	
+	NSArray *two = [jsonObj objectForKey:@"users"]; 
+	for (NSDictionary *one in two)
+	{
+		if ([[one valueForKey:@"badge_counts"] valueForKey:key] != nil)
+		{
+			[array addObject:[[one valueForKey:@"badge_counts"] valueForKey:key]];
+			
+		}
+		else {
+			[array addObject:@"0"];
+		}
+	}
+	
+	NSString *final = [array objectAtIndex:0];
+	return final;
+}
 -(NSString *)getUserID:(int)theID forKey:(NSString *)key andData:(NSString *)data
 {
 	
@@ -198,5 +224,114 @@
 								   secondkey:key];
 	return result;
 }
-	//Look ma! No memory management!
+-(NSArray*)getAnswers:(NSString *)key  andData:(NSString *)data
+{
+	//	NSString *theURL = [[NSString alloc] initWithFormat:@"%@questions/%@?key=%@",_url, ID, _apikey];
+	
+	NSMutableArray *array;// = [NSMutableArray array];
+	array = [[NSMutableArray alloc] init];
+	SBJSON *parser = [[SBJSON alloc] init];
+	
+	// parse the JSON response into an object
+	// Here we're using NSArray since we're parsing an array of JSON status objects
+	NSMutableDictionary *jsonObj = [parser objectWithString:data error:nil];
+	
+	NSArray *two = [jsonObj objectForKey:@"questions"]; 
+	for (NSDictionary *one in two)
+	{
+		if ([[one valueForKey:@"answers"] valueForKey:key] != nil)
+		{
+			[array addObject:[[one valueForKey:@"answers"] valueForKey:key]];
+			
+		}
+		else {
+			[array addObject:@" "];
+		}
+	}
+	
+	return array;
+	
+}
+-(NSString*)getVersion
+{
+	NSURL *url = [ NSURL URLWithString:[ NSString stringWithFormat:@"http://www.mattsapps.com/StackTop/stats/version"]];
+	NSString *version = [NSString stringWithContentsOfURL:url];
+	NSMutableString * newString = [NSMutableString stringWithString:version];
+	
+    NSRange foundRange = [version rangeOfString:@"\n"];
+    if (foundRange.location != NSNotFound)
+    {
+        [newString replaceCharactersInRange:foundRange
+                                 withString:@""];
+    }
+	return newString;
+
+}
+
+-(NSArray*)getSingleAnswers:(NSString *)key andData:(NSString *)data
+{
+	NSArray *result = [self connectMekThxBai:data 
+									firstkey:@"answers" 
+								   secondkey:key];
+	return result;
+	
+}
+-(NSArray*)getOwnerfromAnswers:(NSString *)key andData:(NSString *)data
+{
+	
+	NSMutableArray *array;
+	array = [[NSMutableArray alloc] init];
+	SBJSON *parser = [[SBJSON alloc] init];
+	
+	NSMutableDictionary *jsonObj = [parser objectWithString:data error:nil];
+	NSArray *two = [jsonObj objectForKey:@"answers"];
+	for (NSDictionary *one in two)
+	{
+		if ([[one valueForKey:@"owner"] valueForKey:key] != nil)
+		{
+			[array addObject:[[one valueForKey:@"owner"] valueForKey:key]];
+			
+		}
+		else {
+			[array addObject:@""];
+		}
+	}
+	return array;
+	
+}
+-(NSString *)getSingleQuestions:(NSString *)key andData:(NSString *)data
+{
+	NSArray *array = [self connectMekThxBai:data 
+								   firstkey:@"questions" 
+								  secondkey:key];
+	NSString *result = [array objectAtIndex:0];
+	
+	return result;
+		
+}
+-(NSString*)getOwnerfromQuestions:(NSString *)key andData:(NSString *)data
+{
+	NSMutableArray *array;
+	array = [[NSMutableArray alloc] init];
+	SBJSON *parser = [[SBJSON alloc] init];
+	
+	NSMutableDictionary *jsonObj = [parser objectWithString:data error:nil];
+	
+	NSArray *two = [jsonObj objectForKey:@"questions"]; 
+	for (NSDictionary *one in two)
+	{
+		if ([[one valueForKey:@"owner"] valueForKey:key] != nil)
+		{
+			[array addObject:[[one valueForKey:@"owner"] valueForKey:key]];
+			
+		}
+		else {
+			[array addObject:@" "];
+		}
+	}
+	
+	NSString *final = [array objectAtIndex:0];
+	return final;
+	
+}
 @end
