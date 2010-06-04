@@ -18,8 +18,6 @@
 	NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:theURL]];
 	
 	NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-	
-	// Get JSON as a NSString from NSData response
 	NSString *json_string = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
 	return json_string;
 }
@@ -58,8 +56,7 @@
 			}
 
 		}
-	
-
+		
 	return array;
 
 }
@@ -248,8 +245,7 @@
 			[array addObject:@" "];
 		}
 	}
-	
-	return array;
+	return [array autorelease];
 	
 }
 -(NSString*)getVersion

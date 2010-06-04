@@ -27,7 +27,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <Foundation/Foundation.h>
+//#import <Foundation/Foundation.h>
+#import "MSOEngineGlobalHeader.h"
 #import "SBJsonParser.h"
 #import "SBJsonWriter.h"
 

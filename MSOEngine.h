@@ -6,7 +6,8 @@
 //  Copyright 2010 Matt's Apps. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+//#import <Cocoa/Cocoa.h>
+#import "MSOEngineGlobalHeader.h"
 #import "JSON.h"
 
 
