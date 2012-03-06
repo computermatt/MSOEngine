@@ -250,17 +250,8 @@
 }
 -(NSString*)getVersion
 {
-	NSURL *url = [ NSURL URLWithString:[ NSString stringWithFormat:@"http://www.mattsapps.com/StackTop/stats/version"]];
-	NSString *version = [NSString stringWithContentsOfURL:url];
-	NSMutableString * newString = [NSMutableString stringWithString:version];
-	
-    NSRange foundRange = [version rangeOfString:@"\n"];
-    if (foundRange.location != NSNotFound)
-    {
-        [newString replaceCharactersInRange:foundRange
-                                 withString:@""];
-    }
-	return newString;
+
+	return @"1.1";
 
 }
 
